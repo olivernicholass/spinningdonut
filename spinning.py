@@ -50,8 +50,8 @@ while True:
     for i in range(rows):
         col2 = []
         for j in range(columns):
-            col1.append(" ")
-            output.append(col1)
+            col2.append(0)
+        zbuffer.append(col2)
 
     for T in range(0,628,12):   
         cosT, sinT = math.cos(T/100), math.sin(T/100)
@@ -68,18 +68,18 @@ while True:
 
         # screen projection
 
-        xp = math.floor(-x*K1*ooz)
-        yp = math.floor(-y*K1*ooz)
+            xp = math.floor(-x*K1*ooz)
+            yp = math.floor(-y*K1*ooz)
 
-        l = cosP*cosT*sinB-cosA*cosT*sinP-sinA*sinT+cosB*(cosA*sinT-cosT*sinA*sinP)
-        if l > -0.8:
-            l = abs(l)
-            yc = int((yp + y_offset)/y_space)
-            xc = int((xp + x_offset)/x_space)
-            if ooz > zbuffer[yc][xc]:
-                zbuffer[yc][xc] = ooz
-                L = round(l*8)
-                output[yc][xc] = chars[L]
+            l = cosP*cosT*sinB-cosA*cosT*sinP-sinA*sinT+cosB*(cosA*sinT-cosT*sinA*sinP)
+            if l > -0.8:
+                l = abs(l)
+                yc = int((yp + y_offset)/y_space)
+                xc = int((xp + x_offset)/x_space)
+                if ooz > zbuffer[yc][xc]:
+                    zbuffer[yc][xc] = ooz
+                    L = round(l*8)
+                    output[yc][xc] = chars[L]
 
     for a in range(rows):
         for b in range(columns):
